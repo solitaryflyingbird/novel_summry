@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text File Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="files_section">
+                <h2>Text Files</h2>
+                <input type="file" id="fileInput" accept=".txt" multiple>
+                <ul id="fileList"></ul>
+            </div>
+            <div class="settings_section">
+                <label for="apiKeyInput">GPT API Key:</label>
+                <input type="text" id="apiKeyInput" placeholder="Enter your GPT API key">
+                <button id="saveApiKeyButton">Save API Key</button>
+            </div>
+        </div>
+        <div class="content">
+            <h2>File Content</h2>
+            <pre id="fileContent"></pre>
+            <div class="content_summary">
+                <h2>Content Summary</h2>
+                <pre id="fileSummary"></pre>
+            </div>
+        </div>
+    </div>
+    <script src="loading.js"></script>
+    <script src="gpt_api.js"></script>
+</body>
+</html>

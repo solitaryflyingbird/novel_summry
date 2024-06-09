@@ -51,3 +51,24 @@ function displayFileContent(file) {
     };
     reader.readAsText(file);
 }
+
+document.getElementById('saveApiKeyButton').addEventListener('click', function() {
+    // Get the value from the input field
+    const apiKey = document.getElementById('apiKeyInput').value;
+
+    // Save the API key to localStorage
+    if (apiKey) {
+        localStorage.setItem('gptApiKey', apiKey);
+        alert('API key saved successfully!');
+    } else {
+        alert('Please enter a valid API key.');
+    }
+});
+
+// Optionally, load the API key from localStorage when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const savedApiKey = localStorage.getItem('gptApiKey');
+    if (savedApiKey) {
+        document.getElementById('apiKeyInput').value = savedApiKey;
+    }
+});

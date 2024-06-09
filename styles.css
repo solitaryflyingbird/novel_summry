@@ -111,6 +111,14 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+#runButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 #saveApiKeyButton:hover {
     background-color: #45a049;

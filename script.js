@@ -1,7 +1,12 @@
+let main_text_Dictionary = {};
+
+
 document.getElementById('fileInput').addEventListener('change', function(event) {
     const fileList = document.getElementById('fileList');
     fileList.innerHTML = ''; // Clear existing list
-    const files = Array.from(event.target.files);
+    main_text_Dictionary = {}; // Initialize global variable
+
+    const files = Array.from(event.target.files); // Convert file list to array
 
     // Sort files by name, taking numbers into account
     files.sort((a, b) => naturalCompare(a.name, b.name));
@@ -9,17 +14,25 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
     files.forEach((file, index) => {
         const listItem = document.createElement('li');
         listItem.textContent = `${index + 1}. ${file.name}`;
-        listItem.addEventListener('click', () => displayFileContent(file));
+        listItem.addEventListener('click', () => displayFileContent(file.name));
         fileList.appendChild(listItem);
+
+        // Read file content and store in the dictionary
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            main_text_Dictionary[file.name] = event.target.result;
+        };
+        reader.readAsText(file);
     });
 });
 
-function displayFileContent(file) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        document.getElementById('fileContent').textContent = event.target.result;
-    };
-    reader.readAsText(file);
+function displayFileContent(fileName) {
+    const fileContent = main_text_Dictionary[fileName];
+    if (fileContent) {
+        document.getElementById('fileContent').textContent = fileContent;
+    } else {
+        document.getElementById('fileContent').textContent = 'Error: File content not found';
+    }
 }
 
 // Function to compare strings with numbers naturally
@@ -41,15 +54,6 @@ function naturalCompare(a, b) {
     }
 
     return ax.length - bx.length;
-}
-
-
-function displayFileContent(file) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        document.getElementById('fileContent').textContent = event.target.result;
-    };
-    reader.readAsText(file);
 }
 
 document.getElementById('saveApiKeyButton').addEventListener('click', function() {

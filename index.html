@@ -19,11 +19,14 @@
                 <input type="text" id="apiKeyInput" placeholder="Enter your GPT API key">
                 <button id="saveApiKeyButton">Save API Key</button>
                 <button id="runButton">Run</button>
+                <button id="runAllButton">Run All</button>
             </div>
         </div>
         <div class="content">
-            <h2>File Content</h2>
-            <pre id="fileContent"></pre>
+            <h2>File Content and Prompt</h2>
+            <button id="editButton">Edit</button>
+            <pre id="fileContent" contenteditable="false"></pre>
+            <button id="saveEditButton" style="display:none;">Save</button>
             <div class="content_summary">
                 <h2>Content Summary</h2>
                 <pre id="fileSummary"></pre>

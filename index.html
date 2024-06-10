@@ -20,6 +20,7 @@
                 <button id="saveApiKeyButton">Save API Key</button>
                 <button id="runButton">Run</button>
                 <button id="runAllButton">Run All</button>
+                <span id="loadingMessage" >실행중...</span>
             </div>
         </div>
         <div class="content">
@@ -28,7 +29,10 @@
             <pre id="fileContent" contenteditable="false"></pre>
             <button id="saveEditButton" style="display:none;">Save</button>
             <div class="content_summary">
-                <h2>Content Summary</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Content Summary</h2>
+                    <button id="saveAllButton">Save All</button>
+                </div>
                 <pre id="fileSummary"></pre>
             </div>
         </div>

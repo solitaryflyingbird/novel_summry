@@ -154,6 +154,9 @@ document.getElementById('runButton').addEventListener('click', async function() 
         return;
     }
 
+    const loadingMessage = document.getElementById('loadingMessage');
+    loadingMessage.style.opacity = 0.5; // Set opacity to 0.5
+
     try {
         const summary = await getSummaryFromGPT(fileContentElement, apiKey);
         document.getElementById('fileSummary').textContent = summary;
@@ -162,6 +165,8 @@ document.getElementById('runButton').addEventListener('click', async function() 
         }
     } catch (error) {
         alert('Failed to get summary from GPT: ' + error.message);
+    } finally {
+        loadingMessage.style.opacity = 0; // Revert opacity back to 0
     }
 });
 
@@ -173,6 +178,9 @@ document.getElementById('runAllButton').addEventListener('click', async function
         alert('Please enter and save your GPT API key first.');
         return;
     }
+
+    const loadingMessage = document.getElementById('loadingMessage');
+    loadingMessage.style.opacity = 0.5; // Set opacity to 0.5
 
     for (const fileName in main_text_Dictionary) {
         if (main_text_Dictionary.hasOwnProperty(fileName)) {
@@ -188,4 +196,32 @@ document.getElementById('runAllButton').addEventListener('click', async function
             }
         }
     }
+
+    loadingMessage.style.opacity = 0; // Revert opacity back to 0
+});
+
+// Save All button event
+document.getElementById('saveAllButton').addEventListener('click', function() {
+    let combinedContent = '';
+    let index = 1;
+
+    // Get the file names and sort them naturally
+    const fileNames = Object.keys(summaries_Dictionary).sort(naturalCompare).reverse();
+
+    // Reverse the sorted file names
+    fileNames.reverse();
+
+    fileNames.forEach((fileName) => {
+        combinedContent += `${index}. ${fileName}\n`;
+        combinedContent += `${summaries_Dictionary[fileName]}\n\n`;
+        index++;
+    });
+
+    const blob = new Blob([combinedContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'summaries.txt';
+    a.click();
+    URL.revokeObjectURL(url); // Clean up the URL object
 });

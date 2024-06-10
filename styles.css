@@ -17,27 +17,32 @@ body {
     background-color: #fff;
 }
 
-.sidebar {
-    width: 30%;
+.sidebar, .content {
     padding: 20px;
-    border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
 }
 
+.sidebar {
+    width: 30%;
+    border-right: 1px solid #ddd;
+}
+
+.files_section, .settings_section {
+    overflow-y: auto;
+}
+
 .files_section {
     height: 70%;
-    overflow-y: auto;
 }
 
 .settings_section {
     height: 30%;
     border-top: 1px solid #ddd;
     padding-top: 10px;
-    overflow-y: auto;
 }
 
-.files_section h2, .settings_section h2 {
+.files_section h2, .settings_section h2, .content h2, .content_summary h2 {
     margin-top: 0;
 }
 
@@ -62,36 +67,22 @@ body {
 
 .content {
     width: 70%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
 }
 
-.content h2 {
-    margin-top: 0;
+#fileContent, .content_summary {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
 }
 
 #fileContent {
-    white-space: pre-wrap;
-    word-wrap: break-word;
     height: 75%;
-    overflow-y: auto; /* Allow scrolling within the file content area */
 }
 
 .content_summary {
     height: 25%;
     border-top: 1px solid #ddd;
     padding-top: 10px;
-    overflow-y: auto; /* Allow scrolling within the summary area */
-}
-
-.content_summary h2 {
-    margin-top: 0;
-}
-
-#fileSummary {
-    white-space: pre-wrap;
-    word-wrap: break-word;
 }
 
 #apiKeyInput {
@@ -103,23 +94,7 @@ body {
     border-radius: 4px;
 }
 
-#saveApiKeyButton {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-#runButton {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-#runAllButton {
+button {
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -128,6 +103,11 @@ body {
     cursor: pointer;
 }
 
-#saveApiKeyButton:hover {
+button:hover {
     background-color: #45a049;
+}
+
+#loadingMessage {
+    opacity: 0;
+    transition: opacity 0.3s;
 }
